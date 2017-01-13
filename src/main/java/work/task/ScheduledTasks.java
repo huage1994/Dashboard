@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import work.model.CodeDebt;
+import work.model.TechIssue;
 import work.service.CodeDebtService;
+import work.service.TechIssueService;
 import work.utils.ComponentName;
 import work.utils.TransferData;
 
@@ -23,6 +25,9 @@ public class ScheduledTasks {
     @Autowired
     CodeDebtService codeDebtService;
 
+    @Autowired
+    TechIssueService techIssueService;
+
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
 
     @Scheduled(fixedRate = 10000)
@@ -31,9 +36,16 @@ public class ScheduledTasks {
     }
 
     @Scheduled(cron = "0 0 4 * * ?")
-    public void getDebt(){
+    public void planDebt(){
         CodeDebt[] codeDebts = codeDebtService.getCodeDebt();
-        TransferData.setTrans(ComponentName.codeDebt,codeDebts);
+        TransferData.setTrans(ComponentName.codeDebts,codeDebts);
         System.out.println(codeDebts[0].toString());
+    }
+
+    @Scheduled(cron = "0 0 4 * * ?")
+    public void planTechIssue(){
+        TechIssue[] techIssues = techIssueService.getAllTechIssues();
+        TransferData.setTrans(ComponentName.techIssues,techIssues);
+
     }
 }

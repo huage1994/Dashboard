@@ -9,6 +9,7 @@ public class TechIssue {
 
     @Override
     public String toString() {
-        return total +"success  "+issues.length;
+        String xx = issues.length==0?"sss":issues[0].severity;
+        return total +"success  "+ xx;
     }
 }

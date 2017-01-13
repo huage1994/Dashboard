@@ -19,9 +19,19 @@ public class TechIssueService {
 
     public TechIssue[] getAllTechIssues(){
         String[] urls = {
-            "http://10.97.153.73:9000/api/issues/search?componentRoots=com.sap.mfg.qm.core",
-            ""
+            "http://10.97.153.73:9000/api/issues/search?componentRoots=com.sap.mfg.dc.core&statuses=OPEN,REOPENED",
+            "http://10.97.153.73:9000/api/issues/search?componentRoots=com.sap.mfg.dc.web&statuses=OPEN,REOPENED",
+            "http://10.97.153.73:9000/api/issues/search?componentRoots=com.sap.mfg.qm.core&statuses=OPEN,REOPENED",
+            "http://10.97.153.73:9000/api/issues/search?componentRoots=com.sap.mfg.qm.web&statuses=OPEN,REOPENED",
+            "http://10.97.153.73:9000/api/issues/search?componentRoots=com.sap.mfg.collaboration&statuses=OPEN,REOPENED",
+            "http://10.97.153.73:9000/api/issues/search?componentRoots=com.sap.mfg.common.service&statuses=OPEN,REOPENED",
         };
-        return  null;
+        TechIssue[] techIssues = new TechIssue[6];
+        for (int i=0;i<6;i++)
+        {
+            techIssues[i]  = getTechIssue(urls[i]);
+        }
+        return  techIssues;
     }
+
 }

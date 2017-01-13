@@ -1,7 +1,9 @@
 package work.controller;
 
 import work.model.CodeDebt;
+import work.model.TechIssue;
 import work.outputModel.CodeDebtResponse;
+import work.outputModel.TechIssueResponse;
 import work.utils.ComponentName;
 import work.utils.TransferData;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,14 +37,14 @@ public class RestfulController {
 
     @RequestMapping("/codeDebt")
     public CodeDebt[] getCodeDebt(){
-        CodeDebt[] codeDebt = (CodeDebt[]) TransferData.getTrans(ComponentName.codeDebt);
+        CodeDebt[] codeDebt = (CodeDebt[]) TransferData.getTrans(ComponentName.codeDebts);
         return codeDebt;
     }
 
     @RequestMapping("/codeQuality/detail/codeDebt")
-    public CodeDebtResponse[] getCodeDebtNew(){
+    public CodeDebtResponse[] getCodeDebtResponse(){
         CodeDebtResponse[] codeDebtResponses = new CodeDebtResponse[3];
-        CodeDebt[] codeDebt = (CodeDebt[]) TransferData.getTrans(ComponentName.codeDebt);
+        CodeDebt[] codeDebt = (CodeDebt[]) TransferData.getTrans(ComponentName.codeDebts);
         float sum = 0;
         for (int i=0; i<codeDebt.length;i++)
         {
@@ -55,5 +57,27 @@ public class RestfulController {
         codeDebtResponses[2] = new CodeDebtResponse("Collaboration",codeDebt[4],codeDebt[5],sum);
 
         return codeDebtResponses;
+    }
+
+    @RequestMapping("/codeQuality/detail/techIssue")
+    public TechIssueResponse[] getTechIssueResponse(){
+        TechIssueResponse[] techIssueResponses = new TechIssueResponse[6];
+        TechIssue[] techIssues = (TechIssue[]) TransferData.getTrans(ComponentName.techIssues);
+        TechIssue[] techIssues1 = new TechIssue[2];
+        techIssues1[0] = techIssues[4];
+        techIssues1[1] = techIssues[5];
+        techIssueResponses[0] = new TechIssueResponse("Collaboration","high",techIssues1);
+        techIssueResponses[1] = new TechIssueResponse("Collaboration","medium",techIssues1);
+        techIssueResponses[2] = new TechIssueResponse("Collaboration","low",techIssues1);
+        TechIssue[] techIssues2 = new TechIssue[4];
+        for (int i=0;i<4;i++)
+        {
+            techIssues2[i] = techIssues[i];
+        }
+
+        techIssueResponses[3] = new TechIssueResponse("Design&Quality","high",techIssues2);
+        techIssueResponses[4] = new TechIssueResponse("Design&Quality","medium",techIssues2);
+        techIssueResponses[5] = new TechIssueResponse("Design&Quality","low",techIssues2);
+        return techIssueResponses;
     }
 }
