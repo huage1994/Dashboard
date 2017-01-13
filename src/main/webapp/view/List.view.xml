@@ -1,0 +1,27 @@
+<mvc:View controllerName="sap.ui.demo.controller.List" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified">
+	<!--	<List id = "list" headerText="{i18n>listTitle}" class="sapUiResponsiveMargin" width="auto"
+		items="{ path : 'asset>/', sorter : { path : 'Type', group : true } }">
+		 <headerToolbar>
+         <Toolbar>
+            <Title text="{i18n>listTitle}"/>
+            <ToolbarSpacer/>
+            <SearchField width="50%" search="onFilterInvoices" selectOnFocus="false"/>
+         </Toolbar>
+      </headerToolbar>
+		<items>
+			<ObjectListItem title="No. {asset>ProductID}   {asset>ProductName}" type="Navigation"
+					press="onPress"/>
+		</items>
+	</List>-->
+	
+		<Page title="DIM ASE Dashboard">
+			<content>
+				<mvc:XMLView viewName="sap.ui.demo.view.Section1"/>
+				<mvc:XMLView viewName="sap.ui.demo.view.Section2"/>
+				<mvc:XMLView viewName="sap.ui.demo.view.Section3"/>
+				<mvc:XMLView viewName="sap.ui.demo.view.Section4"/>
+			</content>
+		</Page>
+	
+
+</mvc:View>

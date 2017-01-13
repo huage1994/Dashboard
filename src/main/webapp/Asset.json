@@ -1,0 +1,32 @@
+[
+	{
+        "ProductID": "00001",
+        "ProductName": "Laptop",
+        "ProductStatus": "abort",
+        "Type":"server",
+        "UserName": "Arlex"  
+    },
+	{
+        "ProductID": "00002",
+        "ProductName": "Battery",
+        "ProductStatus": "abort",
+        "Type":"sparepart",
+        "UserName": "May"  
+    },
+	{
+        "ProductID": "00003",
+        "ProductName": "Server",
+        "ProductStatus": "use",
+        "Type":"server",
+        "UserName": "Lucy"  
+    },
+	{
+        "ProductID": "00004",
+        "ProductName": "Box",
+        "ProductStatus": "buy",
+        "Type":"sparepart",
+        "UserName": "Peter"  
+    }
+	
+  
+]

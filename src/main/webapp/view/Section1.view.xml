@@ -1,0 +1,106 @@
+<mvc:View  xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:u="sap.ui.unified">
+	
+		<Panel class="testResultPanel">
+		<FlexBox class="testResultBox" alignItems="Start" alignContent="SpaceAround">
+			<items>
+				<!--	<Button text="1" width="100%" type="Emphasized" class="sapUiSmallMarginEnd" >
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Button>
+						<Button text="2" width="100%" type="Reject" class="sapUiSmallMarginEnd">
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Button>
+						<Button text="3" width="100%" type="Accept" >
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Button>
+							<Button text="4" width="100%" type="Reject" >
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Button>-->
+				<Panel class="testPanel" expandable="true" headerText="Panel with a header text" width="auto">
+					<Table class="sapUiSmallMarginEnd" id="table1" items="{ path : 'asset>/', sorter: { path: 'Type' } }">
+						<columns>
+							<Column width="12em">
+								<Text text="Product"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true">
+								<Text text="Supplier"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true">
+								<Text text="Dimensions"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{asset>ProductID}"/>
+									<Text text="{asset>ProductName}"/>
+									<Text text="text"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+				<Panel expandable="true" headerText="111{i18n>appTitle}{i18n>listTitle}" width="auto">
+					<Table id="table2" items="{ path : 'asset>/', sorter: { path: 'Type' } }">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="Back End UT"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column width="12em">
+								<Text text="Product"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true">
+								<Text text="Supplier"/>
+							</Column>
+							<Column minScreenWidth="Tablet" demandPopin="true">
+								<Text text="Dimensions"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{asset>ProductID}"/>
+									<Text text="{asset>ProductName}"/>
+									<Text text="text"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+				<Panel expandable="true" headerText="Panel with a header text" width="auto">
+					<Table id="table3" items="{ path : 'asset>/', sorter: { path: 'Type' } }">
+						<columns>
+							<Column width="12em">
+								<Text text="Product"/>
+							</Column>
+							<Column minScreenWidth="Tablet">
+								<Text text="Supplier"/>
+							</Column>
+							<Column minScreenWidth="Tablet">
+								<Text text="Dimensions"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{asset>ProductID}"/>
+									<Text text="{asset>ProductName}"/>
+									<Text text="text"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</Panel>
+			</items>
+		</FlexBox>
+	</Panel>
+</mvc:View>

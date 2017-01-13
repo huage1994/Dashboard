@@ -1,0 +1,79 @@
+<mvc:View controllerName="sap.ui.demo.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core">
+	<!--<Page title="Detail">
+		<ObjectHeader title="Name:{asset>ProductName} User:{asset>UserName} Status:{asset>ProductStatus}"/>
+		<headerContent>
+			<Button icon="sap-icon://edit" press="onPress" ariaLabelledBy="editButtonLabel"/>
+		</headerContent>
+	</Page>-->
+	<Page>
+		<Table>
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Detail" level="H2"/>
+					
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="12em">
+					<Text text="Product Name"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="User"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Status"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+					<Text text="Operation"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text id="name" text="{asset>ProductName}"/>
+						<Text id="user" text="{asset>UserName}"/>
+						<Input id="input1" value="{asset>ProductStatus}" editable="{/isEditable}"/>
+						<Button icon="sap-icon://edit" press="onPress" ariaLabelledBy="editButtonLabel" enabled="true"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+		<!--<FlexBox alignItems="Center" justifyContent="Center">
+			<items>
+				<Button text="show lifecycle" press="submit" ariaLabelledBy="editButtonLabel"/>
+			</items>
+		</FlexBox>-->
+		<Table>
+			<headerToolbar>
+				<Toolbar>
+					<Title text="Lifecycle" level="H2"/>
+					
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column width="12em">
+					<Text text="Buy Date"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Use Date"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true">
+					<Text text="Return Date"/>
+				</Column>
+				<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+					<Text text="Abort Date"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text  text="1/2"/>
+						<Text  text="1/2"/>
+						<Text  text="N/A"/>
+						<Text  text="N/A"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</Page>
+</mvc:View>

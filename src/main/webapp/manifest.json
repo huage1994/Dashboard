@@ -1,0 +1,90 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "sap.ui.demo",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": "sap.ui.demo.view.App",
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"dependencies": {
+			"minUI5Version": "1.30",
+			"libs": {
+				"sap.m": {}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "sap.ui.demo.i18n.i18n"
+				}
+			},
+			"asset": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "http://localhost:8090/api/codeQuality/detail/codeDebt"
+			},
+			"node": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "Node.json"
+			},
+			"total": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "Total.json"
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "sap.ui.demo.view",
+				"controlId": "app",
+				"controlAggregation": "pages"
+			},
+			"routes": [{
+				"pattern": "",
+				"name": "list",
+				"target": "list"
+			}, {
+				"pattern": "detail/{Assetpath}",
+				"name": "detail",
+				"target": "detail"
+			}],
+			"targets": {
+				"list": {
+					"viewName": "List"
+				},
+				"detail": {
+					"viewName": "Detail"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	}
+}
