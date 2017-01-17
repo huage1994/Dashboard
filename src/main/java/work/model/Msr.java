@@ -10,7 +10,7 @@ package work.model;
  */
 public class Msr {
     public String key;
-    public long val;
+    public float val;
     public String frmt_val;
 
     @Override

@@ -1,9 +1,12 @@
 package work;
 
+import org.json.simple.parser.ParseException;
+import org.omg.CORBA.TRANSACTION_MODE;
+import work.model.BackEndCoverage;
 import work.model.CodeDebt;
+import work.model.JenkinsStatus;
 import work.model.TechIssue;
-import work.service.CodeDebtService;
-import work.service.TechIssueService;
+import work.service.*;
 import work.utils.ComponentName;
 import work.utils.TransferData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,26 +27,49 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     @Autowired
     TechIssueService techIssueService;
 
+    @Autowired
+    BackEndUtService backEndUtService;
+
+    @Autowired
+    FunctionalQualityIssueSerivice functionalQualityIssueSerivice;
+
+    @Autowired
+    JenkinsStatusService jenkinsStatusService;
+
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-
 
 
         System.out.println("-------------------------------------------");
 
         CodeDebt[] codeDebts = codeDebtService.getCodeDebt();
+        TransferData.setTrans(ComponentName.codeDebts, codeDebts);
 
-        TransferData.setTrans(ComponentName.codeDebts,codeDebts);
-        CodeDebt[] fortest = (CodeDebt[]) TransferData.getTrans(ComponentName.codeDebts);
-//        for (int i=0;i<fortest.length;i++) {
-//            System.out.println(fortest[i].toString());
-//        }
 
         TechIssue[] techIssues = techIssueService.getAllTechIssues();
+        TransferData.setTrans(ComponentName.techIssues, techIssues);
 
-        TransferData.setTrans(ComponentName.techIssues,techIssues);
-        for (int i =0;i<6;i++) {
-            System.out.println(techIssues[i]);
+
+        BackEndCoverage[] backEndCoverages = backEndUtService.getBackEndCoverage();
+        TransferData.setTrans(ComponentName.backEndCoverages, backEndCoverages);
+
+        int[] backEndIsue = new int[2];
+        backEndIsue[0] = functionalQualityIssueSerivice.getFailuretestNum("http://10.58.67.159:8080/job/Team1-Dev-Pipeline/lastCompletedBuild/execution/node/26/wfapi/log");
+        backEndIsue[1] = functionalQualityIssueSerivice.getFailuretestNum("http://10.58.67.159:8080/job/Team2-Dev-Pipeline/lastCompletedBuild/execution/node/26/wfapi/log");
+        TransferData.setTrans(ComponentName.backEndIsue,backEndIsue);
+        //jenkins 访问非常慢， 要等接近半分钟这两个 http请求，才能返回，等出现下面的console输出再测试
+        System.out.println(backEndIsue[0] + "ffffffffffffffffff");
+
+
+        try {
+            JenkinsStatus collaborationbenkinsStatus = jenkinsStatusService.getJenkinsStatus("http://10.58.67.159:8080/job/Team1-Dev-Pipeline/api/json");
+            TransferData.setTrans(ComponentName.collaborationbenkinsStatus,collaborationbenkinsStatus);
+            JenkinsStatus design_quality_jenkinsStatus = jenkinsStatusService.getJenkinsStatus("http://10.58.67.159:8080/job/Team2-Dev-Pipeline/api/json");
+            TransferData.setTrans(ComponentName.design_quality_jenkinsStatus,design_quality_jenkinsStatus);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
     }

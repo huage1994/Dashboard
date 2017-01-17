@@ -1,8 +1,11 @@
 package work.controller;
 
+import work.model.BackEndCoverage;
 import work.model.CodeDebt;
+import work.model.JenkinsStatus;
 import work.model.TechIssue;
 import work.outputModel.CodeDebtResponse;
+import work.outputModel.FunctionalQualityResponse;
 import work.outputModel.TechIssueResponse;
 import work.utils.ComponentName;
 import work.utils.TransferData;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Struct;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -80,4 +84,43 @@ public class RestfulController {
         techIssueResponses[5] = new TechIssueResponse("Design&Quality","low",techIssues2);
         return techIssueResponses;
     }
+
+    @RequestMapping("/functionalQuality/detail/backEnd")
+    public FunctionalQualityResponse[] getFuntionQualityDetail(){
+
+            BackEndCoverage[] backEndCoverages = (BackEndCoverage[]) TransferData.getTrans(ComponentName.backEndCoverages);
+            String design_quality_coverage = calculateCoverage(backEndCoverages[0], backEndCoverages[2]) + "%";
+            String collabration_coverage = calculateCoverage(backEndCoverages[4], backEndCoverages[5]) + "%";
+
+            int[] backEndIssue = (int[]) TransferData.getTrans(ComponentName.backEndIsue);
+            FunctionalQualityResponse[] functionalQualityResponses = new FunctionalQualityResponse[2];
+            functionalQualityResponses[0] = new FunctionalQualityResponse("Collaboration",backEndIssue[0],collabration_coverage);
+            functionalQualityResponses[1] = new FunctionalQualityResponse("Design&Quality",backEndIssue[1],design_quality_coverage);
+            return functionalQualityResponses;
+
+    }
+
+    public float calculateCoverage(BackEndCoverage backEndCoverage1,BackEndCoverage backEndCoverage2){
+        float x = backEndCoverage1.msr[0].val * backEndCoverage1.msr[1].val;
+        float y = backEndCoverage2.msr[0].val * backEndCoverage2.msr[1].val;
+        float z = backEndCoverage1.msr[0].val + backEndCoverage2.msr[0].val;
+        return (x+y)/z;
+    }
+
+    @RequestMapping("/jenkins/status/collaboration")
+    public JenkinsStatus getCollabationJenkinsStatus(){
+        JenkinsStatus jenkinsStatus = (JenkinsStatus) TransferData.getTrans(ComponentName.collaborationbenkinsStatus);
+        return jenkinsStatus;
+    }
+
+    @RequestMapping("/jenkins/status/design_quality")
+    public JenkinsStatus getDesign_QualityJenkinsStatus(){
+        JenkinsStatus jenkinsStatus = (JenkinsStatus) TransferData.getTrans(ComponentName.design_quality_jenkinsStatus);
+        return jenkinsStatus;
+    }
+
+//
+//    @RequestMapping("/jenkins/status")
+
+
 }

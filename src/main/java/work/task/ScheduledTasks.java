@@ -4,8 +4,10 @@ import com.sun.org.apache.bcel.internal.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import work.model.BackEndCoverage;
 import work.model.CodeDebt;
 import work.model.TechIssue;
+import work.service.BackEndUtService;
 import work.service.CodeDebtService;
 import work.service.TechIssueService;
 import work.utils.ComponentName;
@@ -28,6 +30,9 @@ public class ScheduledTasks {
     @Autowired
     TechIssueService techIssueService;
 
+    @Autowired
+    BackEndUtService backEndUtService;
+
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
 
     @Scheduled(fixedRate = 10000)
@@ -48,4 +53,11 @@ public class ScheduledTasks {
         TransferData.setTrans(ComponentName.techIssues,techIssues);
 
     }
+    @Scheduled(cron = "0 0 4 * * ?")
+    public void planTBackEndUtService(){
+        BackEndCoverage[] backEndCoverages = backEndUtService.getBackEndCoverage();
+        TransferData.setTrans(ComponentName.backEndCoverages,backEndCoverages);
+
+    }
+
 }
