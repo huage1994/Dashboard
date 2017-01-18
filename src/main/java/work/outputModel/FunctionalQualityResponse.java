@@ -6,7 +6,7 @@ package work.outputModel;
 public class FunctionalQualityResponse {
 
     public String moduleName;
-    public int issues;
+    public int issues =0;
     public String coverage;
 
     public FunctionalQualityResponse(String moduleName, int issues, String coverage) {

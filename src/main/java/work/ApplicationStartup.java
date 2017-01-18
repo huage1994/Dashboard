@@ -71,6 +71,21 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         } catch (ParseException e) {
             e.printStackTrace();
         }
+//--------------------------------2017.1.18     1
+        int[][] apiTestNum = new int[2][2];
+        apiTestNum[0] = new int[]{-1, -1};
+        apiTestNum[1] = new int[]{-2, -2};
+//        apiTestNum[0] = functionalQualityIssueSerivice.getFailureAndAlltestNum("");
+//        apiTestNum[1] = functionalQualityIssueSerivice.getFailureAndAlltestNum("");
+        TransferData.setTrans(ComponentName.apiTestNum,apiTestNum);
 
+//--------------------------------2017.1.18     2
+        int[][] frontTestNum = new int[2][2];
+        frontTestNum[0] = new int[]{-1, 80};
+        frontTestNum[1] = new int[]{-2, 82};
+//        apiTestNum[0] = functionalQualityIssueSerivice.getFailureAndAlltestNum("");
+//        apiTestNum[1] = functionalQualityIssueSerivice.getFailureAndAlltestNum("");
+        TransferData.setTrans(ComponentName.frontTestNum,frontTestNum);
+        System.out.println("start up finished");
     }
 }

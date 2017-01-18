@@ -14,10 +14,12 @@ public class TechIssueResponse {
     public int issues =0;
 
     public TechIssueResponse(String moduleName, String priority, TechIssue[] techIssues) {
+        int issues = 0;
+
         Map<String,String[]> map= new HashMap<String,String[]>();
-        String[] pri1 = {"BLOCKER","CRITICAL"};
-        String[] pri2 = {"MAJOR"};
-        String[] pri3 = {"MINOR","INFO"};
+        String[] pri1 = {"BLOCKER"};
+        String[] pri2 = {"CRITICAL"};
+        String[] pri3 = {"MAJOR"};
         map.put("high",pri1);
         map.put("medium",pri2);
         map.put("low",pri3);

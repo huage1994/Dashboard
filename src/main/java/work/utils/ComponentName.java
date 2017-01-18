@@ -10,6 +10,7 @@ public class ComponentName {
     public static final String backEndIsue = "backEndIsue";
     public static final String collaborationbenkinsStatus = "collaborationbenkinsStatus";
     public static final String design_quality_jenkinsStatus = "design_quality_jenkinsStatus";
-
+    public static final String apiTestNum = "apiTestNum";
+    public static final String frontTestNum = "frontTestNum";
 
 }
