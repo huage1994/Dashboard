@@ -45,7 +45,7 @@
 			},
 			"asset": {
 				"type": "sap.ui.model.json.JSONModel",
-				"uri": "http://localhost:8090/api/codeQuality/detail/codeDebt"
+				"uri": "/api/codeQuality/detail/codeDebt"
 			},
 			"node": {
 				"type": "sap.ui.model.json.JSONModel",

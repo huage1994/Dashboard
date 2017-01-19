@@ -128,8 +128,8 @@ public class FunctionalQualityIssueSerivice {
             System.out.println(Integer.parseInt(handStr.substring(middle+1,last).trim())+"failure");
 
             int[] result = new int[2];
-            result[0] = Integer.parseInt(handStr.substring(first,middle).trim());
-            result[1] = Integer.parseInt(handStr.substring(middle+1,last).trim());
+            result[1] = Integer.parseInt(handStr.substring(first,middle).trim());
+            result[0] = Integer.parseInt(handStr.substring(middle+1,last).trim());
 
             return result;
         }
