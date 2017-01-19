@@ -62,23 +62,27 @@ public class FunctionalQualityIssueSerivice {
         return result;
     }
 
-    public int[] getFailureAndCoverage(String url) {
-        String handStr = httpRequestGlassfish.getContent(url);
-        System.out.println(handStr);
+    public float[] getFailureAndCoverage(String url) {
+        String initialString = httpRequestGlassfish.getContent(url);
+        int first = 0;
+        float[] result = new float[3];
+        System.out.println(initialString);
+        while (first != -1) {
+            first = initialString.indexOf("Results",first);
+            if (first != -1) {
+            first = initialString.indexOf(":",first);
+                int last = initialString.indexOf("Errors", first);
 
-        int first = handStr.indexOf("Results");
-        if (first != -1) {
-            int last = handStr.indexOf("Errors", first);
+                String handStr = initialString.substring(first, last);
 
-            handStr = handStr.substring(first, last);
 
-            int[] result = new int[2];
-            result[0] = getFailureResult(handStr);
-            result[1] = getCoverageResult(handStr);
+                result[0] += getFailureResult(handStr);
+                result[1] += getCoverageResult(handStr)*getRunResult(handStr);
+                result[2] += getRunResult(handStr);
 
-            return result;
+            }
         }
-        int[] result = {-1,-1};
+        result[1] = result[1]/result[2];
         return result;
     }
 
@@ -99,15 +103,38 @@ public class FunctionalQualityIssueSerivice {
     }
 
 
-    private int getCoverageResult(String handStr) {
+    private float getCoverageResult(String handStr) {
         int first = handStr.indexOf("Coverage");
         first= handStr.indexOf(":",first)+1;
         /* TO DO */
         int last = handStr.indexOf(",", first);
-        return Integer.parseInt(handStr.substring(first, last).trim());
+        return Float.parseFloat(handStr.substring(first, last).trim());
 
 
     }
 
 
+    public int[] getAPITestFailureAndSumCases(String url) {
+        String handStr = httpRequestGlassfish.getContent(url);
+
+        System.out.println(handStr);
+
+        int first = handStr.indexOf("Total TestCases");
+        if (first != -1) {
+            first = handStr.indexOf(":",first)+1;
+            int last = handStr.indexOf("failed)", first);
+            int middle = handStr.indexOf("(", first);
+            System.out.println(Integer.parseInt(handStr.substring(first,middle).trim())+"casr num");
+            System.out.println(Integer.parseInt(handStr.substring(middle+1,last).trim())+"failure");
+
+            int[] result = new int[2];
+            result[0] = Integer.parseInt(handStr.substring(first,middle).trim());
+            result[1] = Integer.parseInt(handStr.substring(middle+1,last).trim());
+
+            return result;
+        }
+        int[] result = {-1,-1};
+        return result;
+
+    }
 }

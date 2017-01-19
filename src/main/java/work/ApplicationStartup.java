@@ -75,16 +75,18 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         int[][] apiTestNum = new int[2][2];
         apiTestNum[0] = new int[]{-1, -1};
         apiTestNum[1] = new int[]{-2, -2};
-//        apiTestNum[0] = functionalQualityIssueSerivice.getFailureAndAlltestNum("");
-//        apiTestNum[1] = functionalQualityIssueSerivice.getFailureAndAlltestNum("");
+//        apiTestNum[0] = functionalQualityIssueSerivice.getAPITestFailureAndSumCases("");
+        apiTestNum[1] = functionalQualityIssueSerivice.getAPITestFailureAndSumCases("http://10.58.67.159:8080/job/Team2-Dev-Pipeline/29/execution/node/135/wfapi/log");
         TransferData.setTrans(ComponentName.apiTestNum,apiTestNum);
 
 //--------------------------------2017.1.18     2
-        int[][] frontTestNum = new int[2][2];
-        frontTestNum[0] = new int[]{-1, 80};
-        frontTestNum[1] = new int[]{-2, 82};
-//        apiTestNum[0] = functionalQualityIssueSerivice.getFailureAndAlltestNum("");
-//        apiTestNum[1] = functionalQualityIssueSerivice.getFailureAndAlltestNum("");
+        float[][] frontTestNum = new float[2][3];
+
+        frontTestNum[0] = new float[]{-2, 82,0};
+        frontTestNum[1] = functionalQualityIssueSerivice.getFailureAndCoverage("http://10.58.67.159:8080/job/Team2-Dev-Pipeline/29/execution/node/142/wfapi/log");
+
+        System.out.println(frontTestNum[1].length+"length");
+        System.out.println(frontTestNum[1][0] +",,,"+frontTestNum[1][1]);
         TransferData.setTrans(ComponentName.frontTestNum,frontTestNum);
         System.out.println("start up finished");
     }

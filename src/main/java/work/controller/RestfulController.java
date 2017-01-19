@@ -92,8 +92,8 @@ public class RestfulController {
 
         int[] backEndIssue = (int[]) TransferData.getTrans(ComponentName.backEndIsue);
         FunctionalQualityResponse[] functionalQualityResponses = new FunctionalQualityResponse[2];
-        functionalQualityResponses[0] = new FunctionalQualityResponse("Collaboration", backEndIssue[0], collabration_coverage);
-        functionalQualityResponses[1] = new FunctionalQualityResponse("Design&Quality", backEndIssue[1], design_quality_coverage);
+        functionalQualityResponses[0] = new FunctionalQualityResponse("Collaboration", backEndIssue[0]+"", collabration_coverage+"%");
+        functionalQualityResponses[1] = new FunctionalQualityResponse("Design&Quality", backEndIssue[1]+"", design_quality_coverage+"%");
         return functionalQualityResponses;
 
     }
@@ -130,10 +130,10 @@ public class RestfulController {
     @RequestMapping("/functionalQuality/detail/frontEnd")
     public FunctionalQualityResponse[] getFrontEndFuntionQualityDetail() {
 
-        int[][] frontTestNum = (int[][]) TransferData.getTrans(ComponentName.frontTestNum);
+        float[][] frontTestNum = (float[][]) TransferData.getTrans(ComponentName.frontTestNum);
         FunctionalQualityResponse[] functionalQualityResponses = new FunctionalQualityResponse[2];
-        functionalQualityResponses[0] = new FunctionalQualityResponse("Collaboration", frontTestNum[0][0], frontTestNum[0][1]+"%");
-        functionalQualityResponses[1] = new FunctionalQualityResponse("Design&Quality", frontTestNum[1][0], frontTestNum[1][1]+"%");
+        functionalQualityResponses[0] = new FunctionalQualityResponse("Collaboration", frontTestNum[0][0]+"", frontTestNum[0][1]+"%");
+        functionalQualityResponses[1] = new FunctionalQualityResponse("Design&Quality", frontTestNum[1][0]+"", frontTestNum[1][1]+"%");
         return functionalQualityResponses;
     }
 }
